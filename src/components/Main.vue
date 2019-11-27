@@ -1,5 +1,5 @@
 <template>
-  <div class="hello">
+  <div class="hello;table-responsive">
       <h1>{{msg}} </h1>
         <div class="alert alert-success alert-dismissable fade show" role="alert">
             Developer Web tool

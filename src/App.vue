@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <Main msg="Welcome to developers Tools - onestop site for developer debug tools"/>
+    <Main msg="Devloper Tools"/>
   </div>
 </template>
 

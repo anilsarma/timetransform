@@ -1,12 +1,19 @@
 <template>
    <div>
-       <table class="table">
+       <table class="table;table-responsive">
            <tbody>
                <tr>
                    <td>
                        <h2>Unix Epoch</h2>
-                        <p ><b class="time">Current Time: {{time.current_epoch}} seconds</b></p>
-                        <p><b class="time">Current Date: {{time.current_date}}</b></p>
+                         <b-btn v-if="showtimezone" @click="showtimezone=!showtimezone;">Hide TimeZone  </b-btn>
+                         <b-btn v-if="!showtimezone" @click="showtimezone=!showtimezone;">Show TimeZone </b-btn>
+                         <p/>
+                        <p ><b class="time">Now: {{time.current_epoch}} (s)</b></p>
+                        <p>
+                            <b v-if="!showtimezone" class="time">{{time.current_date.toDateString()}} {{time.current_date.toLocaleTimeString()}}</b>
+                            <b v-if="showtimezone" class="time">{{time.current_date.toDateString()}} {{time.current_date.toTimeString()}}</b>
+                        </p>
+                        <p  ></p>
                         <div id="converter" @submit.prevent="handleSubmit">
                                 <form>
                                     <label>Epoch Time</label>
@@ -40,11 +47,14 @@
 </template>
 
 <script>
+    var  d = new Date();
+    d.toLocaleTimeString
     export default {
         name: "timeconvertor",
         
         data() {
             return {
+                showtimezone: false,
                 submitting: false,
                 error:false,
                 success: false,
@@ -69,7 +79,7 @@
         methods: {
             timeOut() {
                 var date = new Date();
-                this.time.current_date = date.toString();
+                this.time.current_date = date;
                 this.time.current_epoch =parseInt(date.getTime()/1000);
                 // this.$http.get('events', (events) => {
                 //     this.list = events;
