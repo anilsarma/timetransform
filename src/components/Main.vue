@@ -1,37 +1,37 @@
 <template>
   <div class="hello;table-responsive">
-      <h1>{{msg}} </h1>
-        <div class="alert alert-success alert-dismissable fade show" role="alert">
+      <!--h1>{{msg}} </h1-->
+        <!--div class="alert alert-success alert-dismissable fade show" role="alert">
             Developer Web tool
-        </div>
+        </div-->
       <!--b-btn @click="show2=!show2;">Show Second Tab ? {{ show2 }} </b-btn-->
-      <keep-alive>
-          <b-card>
+      <keep-alive style="padding:100px">
+          <!--b-card-->
        <b-tabs  lazy>
-            <b-tab title="Time Tools" >            
-             Under Development
+            <b-tab title="Time Tools" >                  
              <TimeConvert/>
             </b-tab>
-            <b-tab title="Fix Decoder" v-if="show2" >Under Construction
-                 <img alt="Under Construction" src="../assets/underconstruction.png">
-                 </b-tab>
+        <b-tab title="Fix Decoder" v-if="show2" >
+            <FixDecoderTab/>  
+        </b-tab>
       </b-tabs>
-          </b-card>
+          <!--/b-card-->
       </keep-alive>
-      <img alt="Under Construction" src="../assets/underconstruction.png">
-     
+      <!--img alt="Under Construction" src="../assets/underconstruction.png"-->     
   </div>
   
 </template>
 
 <script>
 import TimeConvert from '@/components/TimeConvert.vue'
+import FixDecoderTab from '@/components/FixDecoderTab.vue'
   export default {
       props: {
         msg: String
     },
      components: {
-             TimeConvert
+             TimeConvert,
+             FixDecoderTab
     },
     data() {
       return {
@@ -79,5 +79,15 @@ button {
     }
     .small-container {
         max-width: 680px;
+    }
+
+    b-tab  {
+    border:31px solid #7d817f;
+   
+}
+ @media (max-width: 320px) { 
+    .element {
+          width: 90%;   
+        }
     }
 </style>

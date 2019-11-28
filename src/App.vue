@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <Main msg="Devloper Tools"/>
+    <Main msg="Developer Tools"/>
   </div>
 </template>
 
