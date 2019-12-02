@@ -19,6 +19,7 @@
                         <p  ></p>
                         <div id="converter" @submit.prevent="handleSubmit">
                                 <br>
+                                <h2>Epoch Time</h2>
                                 <form>
                                     <label>Epoch Time</label>
                                 
@@ -49,7 +50,7 @@
                <hr>
                 <tr>
                    <td>
-                         <h2>Epoch Time Since Midnight Time </h2>
+                         <h2>Time Since Midnight Time </h2>
                          <div id="midnight" @submit.prevent="handleMidnightSubmit">
                             <form>
                                     <label>Hour </label>
@@ -79,10 +80,20 @@
                             <form>
                                  <label >Ticks Since Midnight  </label>
                                  <input  class ="text" type="number"   v-model="midnight.ticks"  @focus="clearMidnightStatus"/>
+                                   <br/>
+                                    <input type="radio" name="unit" value="seconds"      v-model="midnight.unit_since" > seconds
+                                    <input type="radio" name="unit" value="milliseconds" v-model="midnight.unit_since" checked> ms
+                                    <input type="radio" name="unit" value="microseconds" v-model="midnight.unit_since" > us
+                                    <input type="radio" name="unit" value="nanoseconds"  v-model="midnight.unit_since"> ns
+                                    <p v-if="midnight.error" class="error-message">!! {{midnight.error_msg}}</p>
+                                    <br/>
                             </form>
                             <br/>
                              <transition name="slide-fade" mode="out-in">
                                      <div  :key="midnight.ticks">
+                                        <b  class="time">{{getMidightFormatedTimeFromTicks()}} </b>
+                                     </div>
+                                     <div  :key="midnight.unit_since">
                                         <b  class="time">{{getMidightFormatedTimeFromTicks()}} </b>
                                      </div>
                              </transition>
@@ -119,6 +130,7 @@
                     epoch: new Date().getTime(),
                     date: new Date(),
                     unit: 'milliseconds',
+                  
                     current_epoch: 0,
                     current_date: ''
                 },
@@ -128,6 +140,7 @@
                     sec: 0,
                     date: new Date(),
                     unit: "seconds",
+                    unit_since: 'seconds',
                     ampm: new Date().getHours()>11?"PM":"AM",
                     error: false,
                     error_msg:"some thing",
@@ -261,11 +274,11 @@
             },
             getMidightFormatedTimeFromTicks() {
                 var millis = parseInt(this.midnight.ticks)
-                if(this.midnight.unit==="seconds") {
+                if(this.midnight.unit_since==="seconds") {
                     millis = millis*1000;
-                } else  if(this.midnight.unit==="microseconds") {
+                } else  if(this.midnight.unit_since==="microseconds") {
                     millis = millis/1000;
-                } else  if(this.midnight.unit==="nanoseconds") {
+                } else  if(this.midnight.unit_since==="nanoseconds") {
                     millis = millis/1000000;
                 }
                 var millis_num = Math.floor(millis%1000)
